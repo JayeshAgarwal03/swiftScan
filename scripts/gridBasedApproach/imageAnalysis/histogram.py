@@ -41,6 +41,6 @@ def plot_intensity_histogram(image_path):
 if __name__ == "__main__":
     # Replace this string with the actual path to your JPG image
     # Example: "C:/Users/Name/Pictures/photo.jpg" or "./image.jpg"
-    path_to_image = "/home/jayesh/segmentation/results/gridBasedApproach/1kmx1km images/tile_row3_col2.png"
+    path_to_image = "/Users/jayesh/swiftScan/results/gridBasedApproach/1kmx1km images/tile_row3_col2.png"
     
     plot_intensity_histogram(path_to_image)
