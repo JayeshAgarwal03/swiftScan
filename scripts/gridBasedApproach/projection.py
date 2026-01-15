@@ -9,7 +9,6 @@ def generate_tiled_density_map(ply_path, output_dir, pixel_size=0.20, tile_size=
     Generates a massive Point Density Map and slices it into viewable tiles.
     """
     
-    # --- 1. Setup Output Directory ---
     if not os.path.exists(output_dir):
         try:
             os.makedirs(output_dir)
@@ -25,7 +24,6 @@ def generate_tiled_density_map(ply_path, output_dir, pixel_size=0.20, tile_size=
         print("Error: Point cloud is empty.")
         return
 
-    # --- 2. Create the Full Density Grid ---
     points = np.asarray(pcd.points)
     x = points[:, 0]
     y = points[:, 1]
@@ -36,13 +34,13 @@ def generate_tiled_density_map(ply_path, output_dir, pixel_size=0.20, tile_size=
     min_x, max_x = np.min(x), np.max(x)
     min_y, max_y = np.min(y), np.max(y)
 
-    # Calculate full dimensions
+    # Finding size of entire map(in pixels)
     full_width = int(np.ceil((max_x - min_x) / pixel_size))
     full_height = int(np.ceil((max_y - min_y) / pixel_size))
 
     print(f"Full Map Dimensions: {full_width} x {full_height} pixels")
 
-    # Generate Histogram (The Map)
+    # Generate Histogram
     hist, _, _ = np.histogram2d(
         x, y,
         bins=[full_width, full_height],
