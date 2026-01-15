@@ -6,7 +6,7 @@ import math
 
 def generate_tiled_density_map(ply_path, output_dir, pixel_size=0.20, tile_size=1000):
     """
-    Generates a massive Point Density Map and slices it into viewable tiles.
+    Generates a Point Density Map and slices it into viewable tiles.
     """
     
     if not os.path.exists(output_dir):
@@ -50,7 +50,7 @@ def generate_tiled_density_map(ply_path, output_dir, pixel_size=0.20, tile_size=
     # Transpose and Flip to match image orientation
     density_grid = np.flipud(hist.T)
     
-        # --- 3. Exponential Normalization ---
+    # Exponential Normalization
     max_val = np.percentile(density_grid, 98)
     if max_val == 0:
         max_val = np.max(density_grid)
@@ -64,10 +64,10 @@ def generate_tiled_density_map(ply_path, output_dir, pixel_size=0.20, tile_size=
     alpha = 4.0   # increase → more aggressive contrast
     exp_norm = (np.exp(alpha * norm) - 1) / (np.exp(alpha) - 1)
 
-    # Convert to grayscale
+    # Convert to grayscale(Map from [0,1] to [0,255])
     full_image = (exp_norm * 255).astype(np.uint8)
 
-    # --- 4. Tile Generation Loop ---
+    # Tile Generation Loop
     print(f"Slicing into {tile_size}x{tile_size} tiles...")
     
     n_cols = math.ceil(full_width / tile_size)
@@ -92,13 +92,10 @@ def generate_tiled_density_map(ply_path, output_dir, pixel_size=0.20, tile_size=
                 save_path = os.path.join(output_dir, filename)
                 cv2.imwrite(save_path, tile)
                 saved_count += 1
-                # print(f"Saved {filename}") 
 
     print(f"\nSUCCESS: Saved {saved_count} tiles to {output_dir}")
 
-# --- Execution ---
 if __name__ == "__main__":
-    # Your specific file path
     input_ply = "/home/jayesh/segmentation/results/swisssurface3d_isolatedHomes_2024_2684-1251_2056_5728.ply" 
     target_dir = "/home/jayesh/segmentation/results/gridBasedApproach"
     
