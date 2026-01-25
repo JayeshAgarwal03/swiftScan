@@ -2,7 +2,17 @@
 
 ## Scripts
 
-### Grid Based Approach
+### zCoordinateApproach
+
+- **[plyToGrayscale.py](https://github.com/JayeshAgarwal03/swiftScan/blob/main/scripts/zCoordinateApproach/plyToGrayscale.py)**: Converts PLY point clouds into 2D tiled density maps, using all 3 coordinates:
+
+    ### Results
+    ![Projection results](https://github.com/JayeshAgarwal03/swiftScan/blob/main/presentation/grid_1_2.png)
+    *Segmented buildings in 200mx200m tile. Left side -> Ground Truth. Right side -> Our result.*
+    ![Projection results](https://github.com/JayeshAgarwal03/swiftScan/blob/main/presentation/grid_3_1.jpeg)
+    *Segmented buildings in 200mx200m tile. Left side -> Ground Truth. Right side -> Our result.*
+
+### Grid Based Approach(That did not work)
 
 ### Projection  (`scripts/gridBasedApproach/`)
 - **[projection.py](https://github.com/JayeshAgarwal03/swiftScan/blob/main/scripts/gridBasedApproach/projection.py)**: Converts PLY point clouds into 2D tiled density maps:
